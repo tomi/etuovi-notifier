@@ -161,6 +161,7 @@ export function parseAddressToComponents(address: FullAddress): AddressComponent
   return {
     street: parts[0].trim(),
     postalCode: parts[1].trim(),
+    cityPart: parts[2].trim(),
     city: parts[3].trim(),
     country: parts[4].trim(),
   };

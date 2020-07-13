@@ -18,6 +18,7 @@ it('should parse apartments from example1 email', () => {
       addressComponents: {
         street: 'Leikkikuja 4 as 3',
         postalCode: '14700',
+        cityPart: 'Kirkonkylä',
         city: 'Hämeenlinna',
         country: 'Suomi',
       },
@@ -29,6 +30,7 @@ it('should parse apartments from example1 email', () => {
       addressComponents: {
         street: 'Repolankatu 29',
         postalCode: '81700',
+        cityPart: 'Brahea',
         city: 'Lieksa',
         country: 'Suomi',
       },
@@ -40,6 +42,7 @@ it('should parse apartments from example1 email', () => {
       addressComponents: {
         street: 'Höyrymyllyntie 6 A 3',
         postalCode: '90520',
+        cityPart: 'Toppilansalmi',
         city: 'Oulu',
         country: 'Suomi',
       },
