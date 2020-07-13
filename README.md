@@ -8,14 +8,17 @@ An Azure Function to check for new Etuovi emails in GMail and send links of apar
 cp .env-sample .env
 ```
 
-- `BOT_TOKEN`: base64 encoded object of [Telegram bot](https://core.telegram.org/bots) config:
+- `TELEGRAM_BOT_TOKEN`: string (not base64 encoded) of [Telegram bot](https://core.telegram.org/bots) token.
+- `TELEGRAM_BOT_CHANNEL`: string (not base64 encoded) of [Telegram channel](https://core.telegram.org/bots) ID.
 
-```json
-{
-  "token": "", // Access token for the bot
-  "channel": "" // Channel id where messages are sent
-}
-```
+    For group chats: invite bot to a channel, make the channel a super group, promote bot as admin (so they can post there), and run:
+
+    ```
+    curl "https://api.telegram.org/bot$TELEGRAM_BOT_TOKEN/getUpdates"
+    ```
+
+    There you can see the chat id of the group, that is the one needed.
+
 
 - `CREDENTIALS`: base64 encoded object of GMail OAuth2 client secrets. See `credentials.json` in [https://developers.google.com/gmail/api/quickstart/nodejs](https://developers.google.com/gmail/api/quickstart/nodejs).
 
@@ -28,15 +31,20 @@ cp .env-sample .env
 ]
 ```
 
-2. Install the [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools)
+- `GOOGLE_MAPS_KEY`: string (not base64 encoded) of Google Maps API key. You need to enable Directions API and add API Key credentials in Google Cloud Console. See https://developers.google.com/maps/documentation/directions/start
 
-3. Install dependencies
+
+2. Edit the places ([places.ts](CheckForNewApartments/place.ts)) you are often traveling from your apartment. Could be your work via car, hobby via bicycle, etc. Waypoints can be added but please note that Google doesn't support them in public transit. The arrival time can be spcified for public transit (for example 9AM Monday).
+
+3. Install the [Azure Functions Core Tools](https://github.com/Azure/azure-functions-core-tools)
+
+4. Install dependencies
 
 ```bash
 npm i
 ```
 
-4. Create an email notification in https://www.etuovi.com
+5. Create an email notification in https://www.etuovi.com
 
 ## Run locally
 
