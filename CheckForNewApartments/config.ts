@@ -8,12 +8,16 @@ function assertEnvVar(name: string) {
   return process.env[name]!;
 }
 
-const telegramBotToken = JSON.parse(base64.decode(assertEnvVar("BOT_TOKEN")));
-const credentials = JSON.parse(base64.decode(assertEnvVar("CREDENTIALS")));
-const token = JSON.parse(base64.decode(assertEnvVar("ACCESS_TOKEN")));
+const googleCredentials = JSON.parse(base64.decode(assertEnvVar("CREDENTIALS")));
+const googleToken = JSON.parse(base64.decode(assertEnvVar("ACCESS_TOKEN")));
+const telegramBotToken = assertEnvVar("TELEGRAM_BOT_TOKEN");
+const telegramBotChannel = assertEnvVar("TELEGRAM_BOT_CHANNEL");
+const googleMapsKey = assertEnvVar("GOOGLE_MAPS_KEY");
 
 export const config = {
   telegramBotToken,
-  credentials,
-  token
+  telegramBotChannel,
+  googleCredentials,
+  googleToken,
+  googleMapsKey,
 };
