@@ -248,11 +248,27 @@ function parseGoogleHtmlInstructions(html: string): string {
 }
 
 function formatDistance(distanceMeter: number): string {
+  if (distanceMeter < 1000) {
+    return `${roundToTen(distanceMeter).toFixed(0)} m`;
+  }
   return `${(distanceMeter / 1000).toFixed(1)} km`;
 }
 
+function roundToTen(val: number): number {
+  return Math.round(val / 10) * 10;
+}
+
 function formatDuration(durationSec: number): string {
-  return `${Math.round(durationSec / 60).toFixed(0)} min`;
+  const hours = Math.floor(durationSec / 3600);
+  // Ceil probably doesn't hurt in estimation
+  const minutes = Math.ceil((durationSec - (hours * 3600)) / 60);
+
+  const parts: string[] = [];
+  if (hours > 0) {
+    parts.push(`${hours.toFixed(0)} h`);
+  }
+  parts.push(`${minutes.toFixed(0)} min`);
+  return parts.join(' ');
 }
 
 function formatGoogleMapsLink(address1: FullAddress, address2: FullAddress, transitOptions: TransitOptions): string {
