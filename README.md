@@ -33,6 +33,8 @@ cp .env-sample .env
 
 - `GOOGLE_MAPS_KEY`: string (not base64 encoded) of Google Maps API key. You need to enable Directions API and add API Key credentials in Google Cloud Console. See https://developers.google.com/maps/documentation/directions/start
 
+Note that Google Directions API might cost in high volumes. The cost should be very minimal unless you are doing thousands of queries.
+
 
 2. Edit the places ([places.ts](CheckForNewApartments/place.ts)) you are often traveling from your apartment. Could be your work via car, hobby via bicycle, etc. Waypoints can be added but please note that Google doesn't support them in public transit. The arrival time can be spcified for public transit (for example 9AM Monday).
 
@@ -63,3 +65,13 @@ func azure functionapp publish <appname>
 ```
 
 2. Configure the same env variables in `.env` to the function app
+
+
+## Deploy to Heroku
+
+1. Create Heroku app
+1. Add environment variables
+1. Add Heroku Scheduler add-on, and configure `npx ts-node ./scripts/checkForApartments.ts` as the task with comfortable interval.
+1. Add Papertrail add-on for browsing logs easily from browser
+1. Add new git remote for the Heroku app, for example `git remote add prod git@heroku.personal:my-app.git`. *(Requires heroku.personal host to SSH config as well.)*
+1. `git push prod`
