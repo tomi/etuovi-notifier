@@ -71,7 +71,7 @@ func azure functionapp publish <appname>
 
 1. Create Heroku app
 1. Add environment variables
-1. Add Heroku Scheduler add-on, and configure `npx ts-node ./scripts/checkForApartments.ts` as the task with comfortable interval.
+1. Add Heroku Scheduler add-on, and configure `node -r ts-node/register --max-old-space-size=2048 ./scripts/checkForApartments.ts` as the task with comfortable interval.
 1. Add Papertrail add-on for browsing logs easily from browser
 1. Add new git remote for the Heroku app, for example `git remote add prod git@heroku.personal:my-app.git`. *(Requires heroku.personal host to SSH config as well.)*
 1. `git push prod`
