@@ -62,15 +62,18 @@ export async function run(logger: ILogger) {
       logger.info("Sending new targets", apartments.map(apt => apt.url).join(", "));
       await mapSeriesAsync(apartments, async apartment => {
         const street = apartment.addressComponents.street;
-        const city = apartment.addressComponents.city;
-        const initialMsg = `<b>New apartment at ${street}, ${city}</b>\n${apartment.url}`;
+        const cityPart = apartment.addressComponents.cityPart;
+        const initialMsg = `<b>New apartment at ${street}, ${cityPart}</b>\n${apartment.url}`;
         const res = await telegramClient.sendMsg(config.telegramBotChannel, initialMsg);
         const messageId = res.data.result.message_id;
 
         const messages = getMessagesForTravels(apartment, directionsForApartments);
         await mapSeriesAsync(messages, async message => {
-          await telegramClient.sendMsg(config.telegramBotChannel, message, messageId);
+          await telegramClient.sendMsg(config.telegramBotChannel, message);
         });
+
+        const endMessage = `<b>That's all about ${street}, ${cityPart}.</b>`;
+        await telegramClient.sendMsg(config.telegramBotChannel, endMessage);
       })
     }
 
