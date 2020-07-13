@@ -22,7 +22,7 @@ export interface ArrivalTime {
 }
 
 export interface TransitOptions {
-  arrivalTime: ArrivalTime;
+  arrivalTime?: ArrivalTime;
   modes: TravelMode[];
   // When traveling from Apartment to a place address, which waypoints are
   // needed for the travel

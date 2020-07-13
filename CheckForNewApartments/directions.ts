@@ -42,7 +42,9 @@ async function fetchDirections(
           destination: placeAddress,
           units: UnitSystem.metric,
           mode,
-          arrival_time: arrivalTimeToUnix(transitOptions.arrivalTime),
+          arrival_time: transitOptions.arrivalTime
+            ? arrivalTimeToUnix(transitOptions.arrivalTime)
+            : undefined,
           transit_mode: transitOptions.transitModes,
           transit_routing_preference: TransitRoutingPreference.fewer_transfers,
           // "Waypoints are only supported for driving, walking and bicycling directions."
