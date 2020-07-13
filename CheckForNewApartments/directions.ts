@@ -126,7 +126,8 @@ function getMessageForPlaceTravel(apartment: Apartment, directionsForPlace: Dire
   const wayPointAddition = hasWayPoints
     ? `via ${place.transitOptions?.waypoints?.length} waypoints`
     : '';
-  lines.push(`<b>Travel from ${apartment.addressComponents.street}, ${apartment.addressComponents.city} to ${directionsForPlace.placeId} ${wayPointAddition}</b>`);
+  const niceAddress = `${apartment.addressComponents.street}, ${apartment.addressComponents.cityPart}`;
+  lines.push(`<b>Travel from ${niceAddress} to ${directionsForPlace.placeId} ${wayPointAddition}</b>`);
 
   const responses = directionsForPlace.directionsResponses
     .map((response, index) => {

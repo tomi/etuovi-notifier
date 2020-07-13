@@ -33,6 +33,7 @@ export interface TransitOptions {
 export interface AddressComponents {
   street: string;
   city: string;
+  cityPart: string;
   postalCode: string;
   country: string;
 }
