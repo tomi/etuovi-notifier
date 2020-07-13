@@ -198,13 +198,16 @@ function isSuccessResponse(response: DirectionsResponse): boolean {
 
 function getMessageLinesForTransit(leg: FixedRouteLeg): string[] {
   const lines: string[] = [];
-  const departure = moment.unix(leg.departure_time.value).tz(leg.departure_time.time_zone);
-  lines.push(`o  Departure ${departure.format('HH:MM [on] ddd')} (${leg.departure_time.time_zone})`);
+  const departure = moment.unix(leg.departure_time.value);
+  // Uncomment in case debug needed
+  // console.log('Departure', departure.toISOString());
+  lines.push(`o  Departure ${departure.format('HH:mm [on] ddd')} (${leg.departure_time.time_zone})`);
   leg.steps.forEach((step: FixedDirectionsStep) => {
-    lines.push(`|  <i>${parseGoogleHtmlInstructions(step.html_instructions)} (${formatDuration(step.duration.value)})</i>`);
+    lines.push(`|  <i>${parseGoogleHtmlInstructions(step.html_instructions)} (${formatDuration(step.duration.value)}, ${formatDistance(step.distance.value)})</i>`);
   });
-  const arrival = moment.unix(leg.arrival_time.value).tz(leg.arrival_time.time_zone);
-  lines.push(`o  Arrival ${arrival.format('HH:MM [on] ddd')} (${leg.arrival_time.time_zone})`);
+  const arrival = moment.unix(leg.arrival_time.value);
+  // console.log('Arrival', departure.toISOString());
+  lines.push(`o  Arrival ${arrival.format('HH:mm [on] ddd')} (${leg.arrival_time.time_zone})`);
 
   return lines;
 }
