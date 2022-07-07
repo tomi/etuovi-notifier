@@ -19,7 +19,7 @@
     "cheerio": "^1.0.0-rc.3",
     "googleapis": "^39.2.0",
     "js-base64": "^2.5.1",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "moment-timezone": "^0.5.31"
   },
   "devDependencies": {
